@@ -6,9 +6,9 @@ import pickle
 def run_train(x, y):
     """
     Function to train train model: xgboost
-    :param x:
-    :param y:
-    :return:
+    :param x: training data
+    :param y:training labels
+
     """
     print('***Training***')
     clf = OneVsRestClassifier(XGBClassifier(importance_type='gain', n_estimators=100))

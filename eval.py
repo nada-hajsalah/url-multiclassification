@@ -7,10 +7,10 @@ from sklearn.metrics import accuracy_score
 def test(X_test, vect, model_path='classifier.pkl'):
     """
 
-    :param X_test:
+    :param X_test: testing data
     :param vectorizer:
-    :param model_path:
-    :return:
+    :param model_path: classifier
+    :return: y_pred: predictions
     """
     with open(model_path, 'rb') as f:
         classifier = pickle.load(f)
@@ -22,11 +22,11 @@ def test(X_test, vect, model_path='classifier.pkl'):
     return y_pred
 
 
-def metrics(y_test_multilabel, predictions):
+def metric(y_test_multilabel, predictions):
     """
 
-    :param y_test_multilabel:
-    :param predictions:
+    :param y_test_multilabel: set of labels in the test set
+    :param predictions: predictions by the classifier
     :return:
     """
     print("Hamming loss ", metrics.hamming_loss(y_test_multilabel, predictions))

@@ -21,8 +21,8 @@ nltk.download('stopwords')
 def load_dataset(path):
     """
     Read all files in the dataset and convert them into a dataframe
-    :param path:
-    :return:
+    :param path: path of the fold containing dataset
+    :return: dataframe
     """
 
     print("\n--Loading data..")
@@ -40,7 +40,7 @@ def remove_duplicates(df, mode):
     """
     Check if there are duplicated rows with respect to the 'url' column in the dataset. Two possibilities :
         1/ the url and the target are duplicated
-        2/ the url is duplicated with different targets to take into account the recent day
+        2/ the url is duplicated with different targets
 
     :param df: dataframe with three columns 'url', 'target', 'day'
     :param mode: string, choices=('last', 'intersection'), indicates the mode to use to remove the duplicates.
@@ -97,7 +97,7 @@ def clean_path(path):
     """
     Clean path: remove stopwords, punctuations, digits, token with length<2, space
     :param path:
-    :return:
+    :return: path: clened path
     """
 
     # remove punctuation and digits
@@ -209,8 +209,8 @@ def collate_batch(batch):
 def onehotcoding(x, mode):
     """
 
-    :param x:
-    :param mode:
+    :param x: vector
+    :param mode: test or train
     :return:
     """
     if mode == "test":
@@ -251,12 +251,13 @@ def get_labels(targets):
     """
     Return binary labels
     :param targets:
-    :return:
+    :return:vectorizer
+    :return: binary targets
     """
 
     def tokenizer(x):
         return x
-
+    #max features =5 because EDA show that the average number of features is 5
     vectorizer = CountVectorizer(max_features=5, lowercase=False, tokenizer=tokenizer, binary=True).fit(
         targets)
     y_multilabel = vectorizer.transform(targets)

@@ -16,7 +16,7 @@ def main(args):
     urls_dataset = TextDataset(args.path1, args.path2, "last")
     train_set, test_set = train_test_split(
         urls_dataset.data[:100], test_size=0.2, random_state=42)
-    if args.mode == "train":
+    if args.mode == "train-test":
         # training
         v, y_train = get_labels(train_set["target"])
         y_test_multilabel = v.transform(test_set["target"])
@@ -38,13 +38,14 @@ def main(args):
             x_final.astype(float).values)
         X_test = hstack((url_vector, x_final))
         y_pred=test(X_test, v)
+        print(y_pred)
 
-        metrics(y_test_multilabel,y_pred)
+        #metric(y_test_multilabel,y_pred)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["train", "test"], default="train")
+    parser.add_argument("--mode",default="train-test")
 
     parser.add_argument("--path1", type=str, default='data', help="path to the directory containing the dataset")
     parser.add_argument("--path2", type=str, default='tld',
