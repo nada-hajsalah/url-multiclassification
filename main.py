@@ -19,7 +19,7 @@ def main(args):
     if args.mode == "train":
         # training
         v, y_train = get_labels(train_set["target"])
-
+        y_test_multilabel = v.transform(test_set["target"])
         print(train_set.head())
         df_final, url_vector = input_classifier(train_set, args.mode)
         df_final = df_final.drop(
@@ -38,6 +38,8 @@ def main(args):
             x_final.astype(float).values)
         X_test = hstack((url_vector, x_final))
         y_pred=test(X_test, v)
+
+        metrics(y_test_multilabel,y_pred)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 from sklearn.metrics import precision_score, recall_score, f1_score
 from sklearn import metrics
 import pickle
+from sklearn.metrics import accuracy_score
 
 
 def test(X_test, vect, model_path='classifier.pkl'):
@@ -28,7 +29,6 @@ def metrics(y_test_multilabel, predictions):
     :param predictions:
     :return:
     """
-    print("Accuracy :", metrics.accuracy_score(y_test_multilabel, predictions))
     print("Hamming loss ", metrics.hamming_loss(y_test_multilabel, predictions))
     precision = precision_score(y_test_multilabel, predictions, average='micro')
     recall = recall_score(y_test_multilabel, predictions, average='micro')
