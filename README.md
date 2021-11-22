@@ -3,7 +3,7 @@
 ### To run the project
 pip3 install -r requirements.txt
 
-pip3 run main.py --mode "train"
+pip3 run main.py 
 
 
 ### Method
